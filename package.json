@@ -1,0 +1,25 @@
+{
+  "name": "kunstkanon",
+  "version": "1.0.0",
+  "description": "Social Media application with userauthentification, adding and deleting posts and comments",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sterrenstof-code/kunstKANON.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sterrenstof-code/kunstKANON/issues"
+  },
+  "homepage": "https://github.com/sterrenstof-code/kunstKANON#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "nodemon": "^2.0.12",
+    "nunjucks": "^3.2.3"
+  }
+}
