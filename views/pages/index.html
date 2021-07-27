@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>KunstKANON</h1>
+
+    {% include '../snippets/breadcrums.html' %}
+
+    <a href="./posts/new">New post</a>
+    {% for post in posts %}
+    <div>
+      <h1>{{post.username}}</h1>
+      <h4>{{post.caption}}</h4>
+      <a href="/posts/{{post._id}}">See more</a>
+      <h1>{{post._id}}</h1>
+      <img src="{{post.image}}" alt="" />
+      <p>{{post.updated}}</p>
+
+      <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
+        <button>Delete</button>
+      </form>
+      {% for comment in post.comments %} 
+          <p>{{comment.title}}</p>
+          <p>{{comment.username}}</p>
+          <p>{{comment._id}}</p>
+          <form action="/posts/{{post.id}}/comment/{{comment._id}}?_method=DELETE" method="POST">
+            <button>Delete</button>
+          </form>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </body>
+</html>

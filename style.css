@@ -4,4 +4,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-/*# sourceMappingURL=style.css.map */
+
+body {
+  background-color: red;
+}
