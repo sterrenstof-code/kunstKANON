@@ -4,11 +4,68 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <h1>KunstKANON</h1>
+
+    <div class="layout-grid">
+      <header class="layout-grid__header">
+        <div class="layout-grid__header-titlecontainer">
+          <h1 class="layout-grid__header-titlecontainer__title">KunstKANON</h1>
+          <div class="layout-grid__header-titlecontainer__changes">
+            <p class="changes-title">Your post was liked</p>
+            <p class="changes-amount">3 new</p>
+          </div>
+        </div>
+        <div class="layout-grid__header-nav">
+          <div class="layout-grid__header-nav__btns">
+            <a href="">Menu</a>
+            <a href="">Home</a>
+            <a href="">Day/Night</a>
+          </div>
+          <div class="layout-grid__header-nav__changes">
+            <p class="lighttitle">Visit</p>
+            <p class="mediumtitle">Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+        <div class="layout-grid__header-date">
+          <h1 class="layout-grid__header-date__date">30.08</h1>
+          <div class="layout-grid__header-date__changes">
+            <p class="lighttitle">Your post was liked</p>
+            <p class="mediumtitle">3 new</p>
+          </div>
+        </div>
+        <div class="layout-grid__header-member">Member area</div>
+      </header>
+
+      <section class="layout-grid__section">
+        <article class="layout-grid__section-titlecontainer">
+          <p class="lighttitle">Read</p>
+          <h1 class="layout-grid__section-titlecontainer__title">The Nature of Desirability</h1>
+          <div class="layout-grid__section-titlecontainer__subsection">
+            <div class="search">Search</div>
+            <div class="social">Social</div>
+          </div>
+        </article>
+        <article class="layout-grid__section-subtitlecontainer">
+          <h2 class="layout-grid__section-subtitlecontainer__title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto doloribus nihil exercitationem eveniet blanditiis. Unde quisquam, error optio cupiditate doloribus repudiandae delectus.</h2>
+          <h3 class="layout-grid__section-subtitlecontainer__extratitle">Happiness by Design</h3>
+        </article>
+        <div class="layout-grid__section-media">
+          <img src="https://images.unsplash.com/photo-1627301186830-3ce112ebed84?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1234&q=80" alt="">
+        </div>
+        
+      </section>
+      
+      <section class="layout-grid__section">
+        <article></article>
+        <article></article>
+        <article></article>
+      </section>
+    </div>
+
+   
 
     {% include '../snippets/breadcrums.html' %}
 
@@ -18,7 +75,7 @@
       <h1>{{post.username}}</h1>
       <h4>{{post.caption}}</h4>
       <a href="/posts/{{post._id}}">See more</a>
-      <h1>{{post._id}}</h1>
+
       <img src="{{post.image}}" alt="" />
       <p>{{post.updated}}</p>
 
@@ -28,11 +85,17 @@
       {% for comment in post.comments %} 
           <p>{{comment.title}}</p>
           <p>{{comment.username}}</p>
-          <p>{{comment._id}}</p>
           <form action="/posts/{{post.id}}/comment/{{comment._id}}?_method=DELETE" method="POST">
             <button>Delete</button>
           </form>
       {% endfor %}
+      <form action="/posts/{{post.id}}/comment/" method="POST">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="username">
+        <label for="comment">Comment</label>
+        <input type="text" name="comment" id="comment" placeholder="comment">
+        <button>Add comment</button>
+      </form>
     </div>
     {% endfor %}
   </body>

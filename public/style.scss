@@ -1,0 +1,166 @@
+//lightmode/darkmode scss
+
+//constant variables
+$titleFontSize: 3rem;
+$screenPaddingLeftRight: 2.5rem;
+$border1pxSolidColor: 1px solid rgba(0, 0, 0, 0.521);
+
+//general
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.layout-grid {
+  margin-top: 20px;
+  margin-right: $screenPaddingLeftRight;
+  width: 100%;
+  max-width: calc(100vw);
+  min-height: 100%;
+  &__header {
+    width: 100%;
+    height: 100%;
+    min-height: calc(50vh - 10px);
+    display: flex;
+    flex-flow: row wrap;
+    & > div {
+      flex: 1 0 200px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    &-titlecontainer {
+      border-right: $border1pxSolidColor;
+      &__title {
+        font-size: $titleFontSize;
+      }
+      &__changes {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: calc(100% - 10px);
+        border-bottom: $border1pxSolidColor;
+        .changes-title {
+          vertical-align: center;
+          padding: 0.5rem 0;
+          padding-left: $screenPaddingLeftRight;
+        }
+        .changes-amount {
+          vertical-align: center;
+          border-left: $border1pxSolidColor;
+          padding: 0.5rem 0;
+          padding-left: 1rem;
+        }
+      }
+    }
+    &-nav {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      &__btns {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        a {
+          padding: 10px;
+        }
+      }
+      &__changes {
+        display: flex;
+        flex-flow: row nowrap;
+        border-bottom: $border1pxSolidColor;
+        border-right: $border1pxSolidColor;
+        width: calc(100% - 10px);
+        p {
+          padding: 10px;
+        }
+      }
+    }
+
+    &-date {
+      border-bottom: $border1pxSolidColor;
+      &__changes {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        padding: 10px 0;
+        .changes-title {
+          vertical-align: center;
+          padding: 0.5rem 0;
+          padding-left: $screenPaddingLeftRight;
+        }
+        .changes-amount {
+          vertical-align: center;
+          border-left: $border1pxSolidColor;
+          padding: 0.5rem 0;
+          padding-left: 1rem;
+      }
+    }
+  }
+  &-member {
+    border-bottom: $border1pxSolidColor;
+  }
+  }
+
+  &__section {
+    width: 100%;
+    overflow:hidden;
+    min-height: calc(50vh - 10px);
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    & > * {
+      max-height: calc(50vh - 10px);
+      flex: 1 1;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1rem 0;
+    }
+    &-titlecontainer {
+      min-width: 200px;
+      & > * {
+        padding-left:  $screenPaddingLeftRight ;
+      }
+      .lighttitle {
+        
+      }
+
+      &__title {
+        margin-top: 0;
+      }
+
+      &__subsection{
+        display: flex;
+        width:100%;
+        justify-content:space-between;
+        align-items: center;
+        padding: 10px 10px 10px $screenPaddingLeftRight;
+      }
+      
+    }
+
+    &-subtitlecontainer {
+      min-width: 200px;
+    }
+
+    &-media {
+      padding: 0;
+      flex: 2 2;
+      background-color: rgb(111, 0, 255);
+      img {
+        width: 100%;
+        height:100%;
+        object-fit: cover;
+      }
+    }
+  }
+}

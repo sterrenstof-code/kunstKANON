@@ -6,11 +6,11 @@ const { v4: uuid } = require('uuid');
 const methodOverride = require('method-override');
 const port = 3000;
 const mongoose = require('mongoose');
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
-
+app.use(express.static(__dirname + '/public'));
 nunjucks.configure(['views'], {
   autoescape: true,
   express: app
@@ -64,6 +64,14 @@ app.get('/posts/:id/edit', async (req, res) => {
     res.render('pages/edit', { post })
 })
 
+app.post('/posts/:id/comment', async (req, res) => {
+  const { id } = req.params;
+  const {username, comment: title} = req.body;
+  console.log(id, username,title);
+  const added = await Posts.findByIdAndUpdate(id, { $push: { comments : { username, title } } });
+  res.redirect(`/`);
+})
+
 app.put('/posts/:id', async (req, res) => {
   const { id } = req.params;
   const post = await Posts.findByIdAndUpdate(id, req.body, { runValidators: true, new: true });
@@ -76,10 +84,9 @@ app.delete('/posts/:id', async (req, res) => {
     res.redirect('/');
 })
 
-app.delete('/posts/comment/:id', async (req, res) => {
-  const { id } = req.params;
-  const foundPost = await Posts.findByIdAndDelete({id});
-  console.log(foundPost);
+app.delete('/posts/:id/comment/:idc', async (req, res) => {
+  const { id, idc } = req.params;
+  const deleted = await Posts.findByIdAndUpdate(id, { $pull: { comments : { _id: idc } } });
   res.redirect('/');
 })
 
