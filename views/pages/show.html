@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-</head>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
 
-<body>
+  <body>
     {% include '../snippets/breadcrums.html' %}
     <h1>{{post.username}}</h1>
     <h1>{{post.caption}}</h1>
-    <img src="{{post.image}}" alt="">
+    <img src="{{post.image}}" alt="" />
     <a href="/posts/{{post._id}}/edit">Edit Product</a>
     <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
-        <button>Delete</button>
+      <button>Delete</button>
     </form>
-</body>
-
+  </body>
 </html>

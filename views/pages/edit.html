@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Post</title>
+    <link rel="stylesheet" href="/style.css" />
+
 </head>
 
 <body>
     {% include '../snippets/breadcrums.html' %}
     
-    <h1>Edit Product</h1>
+    <h1>Edit Post</h1>
     <form action="/posts/{{post._id}}?_method=PUT" method="POST">
         <label for="username">Post name</label>
         <input type="text" name="username" id="username" placeholder="username" value="{{post.username}}">

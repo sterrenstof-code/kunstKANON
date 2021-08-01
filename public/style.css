@@ -1,3 +1,26 @@
+@import url("https://fonts.googleapis.com/css?family=Assistant:400,700|Playfair+Display:900");
+:root {
+  --clr-light: #fdffc4;
+  --clr-dark: #00332a;
+  --clr-primary:#f1e0e0;
+  --clr-secondary: #a59590;
+  --clr-accent: #ff7750;
+  --foreground: var(--clr-dark);
+  --background: var(--clr-light);
+  --ff-title: "Playfair Display", serif;
+  --ff-body: "Assistant", sans-serif;
+}
+
+.darkmode {
+  --clr-light: #fdffc4;
+  --clr-dark: #00332a;
+  --clr-primary: #202302;
+  --clr-secondary: #00100d;
+  --clr-accent: #ff7750;
+  --foreground: var(--clr-light);
+  --background: var(--clr-dark);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,11 +28,53 @@
           box-sizing: border-box;
 }
 
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--ff-body);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: calc(3rem + 7vw);
+  font-family: var(--ff-title);
+  margin: 0 0 0.25em;
+  line-height: 1;
+}
+
+.dark-mode-toggle {
+  position: absolute;
+  z-index: 100;
+  top: 1em;
+  right: 1em;
+  color: var(--foreground);
+  border: 2px solid currentColor;
+  padding: 4px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.click-here {
+  width: 100px;
+  right: 1.5em;
+  position: absolute;
+  top: 3em;
+}
+
+a {
+  text-decoration: none;
+}
+
 .layout-grid {
+  background: linear-gradient(120deg, var(--clr-primary), var(--clr-secondary));
   margin-top: 20px;
   margin-right: 2.5rem;
   width: 100%;
-  max-width: calc(100vw);
+  max-width: calc(100vw - 2.5rem);
   min-height: 100%;
 }
 
@@ -50,7 +115,11 @@
 }
 
 .layout-grid__header-titlecontainer__title {
-  font-size: 3rem;
+  font-size: 2rem;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  margin-left: 2.5rem;
 }
 
 .layout-grid__header-titlecontainer__changes {
@@ -175,6 +244,7 @@
 
 .layout-grid__section {
   width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.521);
   overflow: hidden;
   min-height: calc(50vh - 10px);
   height: 100%;
@@ -190,8 +260,8 @@
 .layout-grid__section > * {
   max-height: calc(50vh - 10px);
   -webkit-box-flex: 1;
-      -ms-flex: 1 1;
-          flex: 1 1;
+      -ms-flex: 1 1 200px;
+          flex: 1 1 200px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -209,18 +279,30 @@
 }
 
 .layout-grid__section-titlecontainer {
-  min-width: 200px;
+  border-right: 1px solid rgba(0, 0, 0, 0.521);
+  -webkit-box-pack: normal;
+      -ms-flex-pack: normal;
+          justify-content: normal;
 }
 
 .layout-grid__section-titlecontainer > * {
   padding-left: 2.5rem;
 }
 
-.layout-grid__section-titlecontainer__title {
+.layout-grid__section-titlecontainer .lighttitle {
   margin-top: 0;
+  max-width: 150px;
+  font-size: 12px;
+}
+
+.layout-grid__section-titlecontainer__title {
+  margin: auto;
+  margin-left: 0;
+  font-size: 1.5rem;
 }
 
 .layout-grid__section-titlecontainer__subsection {
+  margin-top: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -231,19 +313,37 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 10px 10px 10px 2.5rem;
+  padding: 10px 1rem 10px 2.5rem;
 }
 
 .layout-grid__section-subtitlecontainer {
+  text-overflow: ellipsis;
+  overflow: hidden;
   min-width: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1rem;
+}
+
+.layout-grid__section-subtitlecontainer__title {
+  font-size: 18px;
+  margin: auto;
+  margin-left: 0;
+}
+
+.layout-grid__section-subtitlecontainer__extratitle {
+  margin-top: auto;
+  font-size: 16px;
+  padding: 10px 0;
 }
 
 .layout-grid__section-media {
-  padding: 0;
-  -webkit-box-flex: 2;
-      -ms-flex: 2 2;
-          flex: 2 2;
-  background-color: #6f00ff;
+  padding: 10px 0 0 0;
 }
 
 .layout-grid__section-media img {
@@ -251,5 +351,23 @@
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.layout-grid__section-comments {
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  padding: 1rem;
+}
+
+.layout-grid__section-comments__container {
+  width: 100%;
+  max-height: 80%;
+  text-overflow: ellipsis;
+  overflow: auto;
+}
+
+.layout-grid__section-comments__addcomment {
+  padding: 10px 0;
+  margin-bottom: 0;
 }
 /*# sourceMappingURL=style.css.map */
