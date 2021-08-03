@@ -7,6 +7,8 @@ const methodOverride = require('method-override');
 const port = 3000;
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+const bcrypt = require('bcryptjs');
+const session = require('express-session')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
@@ -15,12 +17,21 @@ nunjucks.configure(['views'], {
   autoescape: true,
   express: app
 });
+app.use(session({secret: 'not a good secret'}));
+
+const requireLogin = (req,res,next) => {
+  if(!req.session.user_id){
+    return res.redirect('/login');
+  }
+  next();
+}
 
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "html")
 app.set('port', process.env.PORT || 3000);
 
 const Posts = require('./models/post');
+const Users = require('./models/user');
 
 mongoose.connect('mongodb://localhost:27017/kunstKanon', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -33,8 +44,11 @@ mongoose.connect('mongodb://localhost:27017/kunstKanon', { useNewUrlParser: true
 
 app.get('/', async (req, res) => {
  const posts = await Posts.find({});
-res.render('pages/index', {posts: posts});
+
+  res.render('pages/index', {posts: posts}) 
+
 })
+
 
 app.get('/posts', async (req, res) => {
   const posts = await Posts.find({});
@@ -48,9 +62,48 @@ app.post('/', async (req, res) => {
   res.redirect(`/posts/${newProduct._id}`)
 })
 
-app.get('/posts/new', async (req, res) => {
+app.get('/posts/new', (req, res) => {
  res.render('pages/new');
  })
+
+app.get('/login', (req, res) => {
+  res.render('pages/login');
+  })
+
+app.get('/register', (req, res) => {
+    res.render('pages/register');
+  })
+
+
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect(`/`);
+})
+
+app.post('/login', async (req, res) => {
+  const {password, username} = req.body;
+  const user = await Users.findOne({username})
+  const validPassword = await bcrypt.compare(password, user.password);
+  if (validPassword){
+    req.session.user_id = user.id;
+    res.redirect(`./secret`)
+  } else {
+    res.send("try again");
+  }
+})
+
+app.post('/register', async (req, res) => {
+  const {password, username} = req.body;
+    const hash = await bcrypt.hash(password, 12);
+    const user = new Users({username, password: hash});
+    req.session.user_id = user.id;
+    await user.save();
+    res.redirect("/");
+    })
+
+app.get('/secret', requireLogin, async (req, res) => {
+      res.render('pages/secret');
+    })
 
 app.get('/posts/:id', async (req, res) => {
   const { id } = req.params;
