@@ -9,108 +9,53 @@
     <title>kunstKANON</title>
   </head>
   <body>
-<button id="dark-mode-toggle" class="dark-mode-toggle">
-  <svg width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496"><path fill="currentColor" d="M8,256C8,393,119,504,256,504S504,393,504,256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z" transform="translate(-8 -8)"/></svg>
-</button>
+    <button id="dark-mode-toggle" class="dark-mode-toggle">
+      <svg
+        width="100%"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 496 496"
+      >
+        <path
+          fill="currentColor"
+          d="M8,256C8,393,119,504,256,504S504,393,504,256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z"
+          transform="translate(-8 -8)"
+        />
+      </svg>
+    </button>
+
+    <header>
+      <a href="./posts/new">New post</a>
+      <div class="member">
+        <a href="./login">Login</a>
+        <a href="./register">Register</a>
+      </div>
+    </header>
 
     <div class="layout-grid">
-      <header class="layout-grid__header">
-        <div class="layout-grid__header-titlecontainer">
-          {% include '../snippets/breadcrums.html' %}
-          <div class="layout-grid__header-titlecontainer__changes">
-            <p class="changes-title">Your post was liked</p>
-            <p class="changes-amount">3 new</p>
-          </div>
-        </div>
-        <div class="layout-grid__header-nav">
-          <div class="layout-grid__header-nav__btns">
-           
-            <a href="./posts/new">New post</a>
-            <a href="">Day/Night</a>
-          </div>
-          <div class="layout-grid__header-nav__changes">
-            <p class="lighttitle">Visit</p>
-            <p class="mediumtitle">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-        <div class="layout-grid__header-date">
-          <h1 class="layout-grid__header-date__date">30.08</h1>
-          <div class="layout-grid__header-date__changes">
-            <p class="lighttitle">Your post was liked</p>
-            <p class="mediumtitle">3 new</p>
-          </div>
-        </div>
-        <div class="layout-grid__header-member">
-          <a href="./login">Login</a>
-          <a href="./register">Register</a>
-        </div>
-      </header>
-
       {% for post in posts %}
+     <div class="layout-grid__container">
       <section class="layout-grid__section">
-        <article class="layout-grid__section-titlecontainer">
-          <p class="lighttitle"><a href="/posts/{{post._id}}">See more</a></p>
-          <h1 class="layout-grid__section-titlecontainer__title">
-            {{post.username}}
-          </h1>
-          <div class="layout-grid__section-titlecontainer__subsection">
-            <div class="search">
-              <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
-                <button class="">Delete</button>
-              </form>
-            </div>
-            <div class="social">Social</div>
+        <article class="layout-grid__section__titlecontainer">
+          <h2>{{post.username}}</h2>
+          <div class="subtitle">
+            <h3>{{post.caption}}</h3>
           </div>
-        </article>
-        <article class="layout-grid__section-subtitlecontainer">
-          <h2 class="layout-grid__section-subtitlecontainer__title">
-            {{post.caption}}
-          </h2>
-          <h3 class="layout-grid__section-subtitlecontainer__extratitle">
-            {{post.updated}}
-          </h3>
-        </article>
-        <div class="layout-grid__section-media">
-          <img src="{{post.image}}" alt="" />
-        </div>
-        <div class="layout-grid__section-comments">
-          <div class="layout-grid__section-comments__container">
-            {% for comment in post.comments %}
-            <div class="comment">
-              <p>{{comment.title}}</p>
-              <p>{{comment.username}}</p>
-              <form
-                action="/posts/{{post.id}}/comment/{{comment._id}}?_method=DELETE"
-                method="POST"
-              >
-                <button class="">Delete</button>
-              </form>
-            </div>
 
-            {% endfor %}
-            
+          <!-- <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
+            <button class="">Delete</button>
+          </form> -->
+          <div class="layout-grid__section__titlecontainer__info">
+          <p>{{post.updated}}</p>
+          <a href="/posts/{{post._id}}">See more</a>
           </div>
-          <div class="layout-grid__section-comments__addcomment">
-            <form action="/posts/{{post.id}}/comment/" method="POST">
-              <label for="username">Username</label>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="username"
-              />
-              <label for="comment">Comment</label>
-              <input
-                type="text"
-                name="comment"
-                id="comment"
-                placeholder="comment"
-              />
-              <button>Add comment</button>
-            </form>
-          </div>
-        </div>
+         
+
+        </article>
       </section>
+      <section class="layout-grid__section">
+        <img src="{{post.image}}" alt="" />
+      </section>
+     </div>
       {% endfor %}
     </div>
   </body>
