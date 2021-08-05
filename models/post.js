@@ -11,6 +11,8 @@ const Comments = new Mongoose.Schema({
   }
 });
 
+var today  = new Date();
+
 const postSchema = new Mongoose.Schema({
   username: {
     type: String,
@@ -24,9 +26,10 @@ const postSchema = new Mongoose.Schema({
   },
   updated: {
     type: Date,
-    default: Date.now,
+    default: today.toLocaleDateString(),
   },
   comments: [Comments],
+  tags: [{type: String}],
 });
 
 const Post = Mongoose.model("Post", postSchema);

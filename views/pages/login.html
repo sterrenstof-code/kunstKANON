@@ -11,14 +11,26 @@
 
 <body>
     {% include '../snippets/breadcrums.html' %}
-    <h1>Login</h1>
-    <form action="/login" method="POST" >
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="username" required>
-        <label for="caption">password</label>
-        <input type="password" name="password" id="password" placeholder="password" required>
-        <button>Submit</button>
-    </form>
+    <div class="register__page">
+    <div class="form__container">
+        <h2>Login</h2>
+        <form action="/login" method="POST" class="form">
+            <div class="group log-input">
+
+                <input type="text" name="username" id="username" placeholder="username" required>
+            </div>
+            <div class="group log-input">
+            
+                <input type="password" name="password" id="password" placeholder="password" required>
+            </div>
+            <div class="container-log-btn">
+                <button type="submit" name = "btn_submit" class="log-form-btn">
+                  <span>Login</span>
+                </button>
+              </div>
+        </form>
+    </div>
+    </div>
 
 </body>
 

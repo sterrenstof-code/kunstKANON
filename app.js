@@ -77,7 +77,7 @@ app.get('/register', (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect(`/`);
+  res.send("succesfully logged out");
 })
 
 app.post('/login', async (req, res) => {
@@ -110,6 +110,12 @@ app.get('/posts/:id', async (req, res) => {
   const post = await Posts.findById(id)
   res.render('pages/show', { post })
   })
+
+  app.get('/tags/:tag', async (req, res) => {
+    const posts = await Posts.find({});
+    const { tag } = req.params;
+    res.render('pages/tag', {posts: posts, tag: tag});
+    })
 
 app.get('/posts/:id/edit', async (req, res) => {
     const { id } = req.params;
