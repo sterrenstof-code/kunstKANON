@@ -102,7 +102,7 @@ const seedPosts = [
                 username: "another test username"
             }
         ],
-        tags: ["drama", "romance", "teen", "fiction"]
+        tags: ["drama", "romance", "action", "adventure", "fantasy", "horror", "crime", "mistery", "avant-garde", "teen", "fiction"]
     }
 ]
 

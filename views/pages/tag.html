@@ -9,10 +9,9 @@
 
   <body>
     {% include '../snippets/breadcrums.html' %}
-    <h1>This is the {{tag}} page</h1>
-
-    {% for post in posts %}
-      {{post.username}}
+    <h2>All about {{tag}}</h2>
+    {% for post in postsWithTag %}
+      {% include '../snippets/post.html' %}
     {% endfor %}
   </body>
 </html>

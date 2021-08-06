@@ -12,9 +12,9 @@
    
     <header>
       <div class="member">
-        <a href="./login">Login</a>
+        <!-- <a href="./login">Login</a>
         <a href="./register">Register</a>
-        <a href="./logout">Logout</a>
+        <a href="./logout">Logout</a> -->
         <button id="dark-mode-toggle" class="dark-mode-toggle">
           <svg
             width="100%"
@@ -35,57 +35,31 @@
       <div class="layout-grid__container intro-section">
         <div class="layout-grid__container__left">
           {% include '../snippets/breadcrums.html' %}
-          <h3>Writers</h3>
           <h3>&dotsquare; Board</h3>
+          <h3>Artist</h3>
           <h3>Stories</h3>
-          <h3>Workshops</h3>
+          <h3>Paintings</h3>
+          <h3>Illustrations</h3>
+          <h3>Film</h3>
           <h3>Schedule</h3>
           <h3>Contact</h3>
    
           <div class="layout-grid__container__left__bottom">
             <a href=""><h4>See your own stories</h4></a>
             <a href="./posts/new"><h4>Add your own stories</h4></a>
+            <a href="./login">Login</a>
+        <a href="./register">Register</a>
+        <a href="./logout">Logout</a> 
           </div>
         </div>
         <div class="layout-grid__container__middle">
-          <h2>FILTER</h2>
-          {% for post in posts %}
-            {% for tag in post.tags %}
-            <h4><a href="/tags/{{tag}}">{{tag}}</a></h4>
-            {% endfor %}
+          <!-- <h2>FILTER</h2> -->
+          {% for tag in tags %}
+            <h4><a href="/tags/{{tag}}">{{tag}}</a></h4> 
           {% endfor %}
-          <h4>Highlights</h4>
+          <!-- <h4>Highlights</h4>
           <h4>&dotsquare; Newly released</h4>
-          <h4>Romance</h4>
-          <h4>Drama</h4>
-          <h4>War</h4>
-          <h4>Comedy</h4>
-          <h4>Bestsellers</h4>
-          <h4>Award winning</h4>
-          <h4>Romance</h4>
-          <h4>Drama</h4>
-          <h4>War</h4>
-          <h4>Comedy</h4>
-          <h4>Bestsellers</h4>
-          <h4>Award winning</h4>
-          <h4>Romance</h4>
-          <h4>Drama</h4>
-          <h4>War</h4>
-          <h4>Comedy</h4>
-          <h4>Bestsellers</h4>
-          <h4>Award winning</h4>
-          <h4>Romance</h4>
-          <h4>Drama</h4>
-          <h4>War</h4>
-          <h4>Comedy</h4>
-          <h4>Bestsellers</h4>
-          <h4>Award winning</h4>
-          <h4>Romance</h4>
-          <h4>Drama</h4>
-          <h4>War</h4>
-          <h4>Comedy</h4>
-          <h4>Bestsellers</h4>
-          <h4>Award winning</h4>
+          <h4>Award winning</h4> -->
         </div>
         <div class="layout-grid__container__right">
          

@@ -9,45 +9,6 @@
 
   <body>
     {% include '../snippets/breadcrums.html' %}
-    <h1>{{post.username}}</h1>
-    <h1>{{post.caption}}</h1>
-    <img src="{{post.image}}" alt="" />
-    <a href="/posts/{{post._id}}/edit">Edit Product</a>
-    <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
-      <button>Delete</button>
-    </form>
-    <div class="layout-grid__section__titlecontainer__info__comments-container">
-      {% for comment in post.comments %}
-      <div class="comment">
-        <p>{{comment.title}}</p>
-        <p>{{comment.username}}</p>
-        <form
-          action="/posts/{{post.id}}/comment/{{comment._id}}?_method=DELETE"
-          method="POST"
-        >
-          <button class="">Delete</button>
-        </form>
-      </div>
-
-      {% endfor %}
-
-      <form action="/posts/{{post.id}}/comment/" method="POST">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="username"
-        />
-        <label for="comment">Comment</label>
-        <input
-          type="text"
-          name="comment"
-          id="comment"
-          placeholder="comment"
-        />
-        <button>Add comment</button>
-      </form>
-    </div>
+    {% include '../snippets/post.html' %}
   </body>
 </html>

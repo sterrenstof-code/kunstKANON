@@ -44,9 +44,12 @@ mongoose.connect('mongodb://localhost:27017/kunstKanon', { useNewUrlParser: true
 
 app.get('/', async (req, res) => {
  const posts = await Posts.find({});
-
-  res.render('pages/index', {posts: posts}) 
-
+const tagList = []
+ posts.forEach(post => {
+   tagList.push(...post.tags);
+})
+const tags = new Set(tagList);
+  res.render('pages/index', {posts: posts, tags:tags}) 
 })
 
 
@@ -114,7 +117,8 @@ app.get('/posts/:id', async (req, res) => {
   app.get('/tags/:tag', async (req, res) => {
     const posts = await Posts.find({});
     const { tag } = req.params;
-    res.render('pages/tag', {posts: posts, tag: tag});
+    const postsWithTag = await Posts.find({ tags: tag }).exec();
+    res.render('pages/tag', {posts: posts, tag: tag, postsWithTag:postsWithTag});
     })
 
 app.get('/posts/:id/edit', async (req, res) => {

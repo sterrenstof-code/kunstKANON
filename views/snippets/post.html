@@ -1,0 +1,44 @@
+<div class="post-container">
+  <h3 class="post-container__title">{{post.username}}</h3>
+    <p class="post-container__text">{{post.caption}}</p>
+    <img class="post-container__image" src="{{post.image}}" alt="" />
+    <div class="post-container__edit">
+      <a  href="/posts/{{post._id}}/edit">Edit Product</a>
+      <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
+        <button>Delete</button>
+      </form>
+    </div>
+  
+    <div class="post-container__comment-container">
+      {% for comment in post.comments %}
+      <div class="comment">
+        <p class="comment__title">{{comment.title}}</p>
+        <p class="comment__username">{{comment.username}}</p>
+        <form
+          action="/posts/{{post.id}}/comment/{{comment._id}}?_method=DELETE"
+          method="POST"
+        >
+          <button class="">Delete</button>
+        </form>
+      </div>
+      {% endfor %}
+
+      <form action="/posts/{{post.id}}/comment/" method="POST">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="username"
+        />
+        <label for="comment">Comment</label>
+        <input
+          type="text"
+          name="comment"
+          id="comment"
+          placeholder="comment"
+        />
+        <button>Add comment</button>
+      </form>
+    </div>
+</div>
