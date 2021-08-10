@@ -20,12 +20,11 @@
       </form>
     </div>
     {% endif %}
-  
-   
+ 
     <div class="post-container__comment-container">
       {% for comment in post.comments %}
       <div class="comment">
-        {% if currentUser and comment.author.equals(currentUser) %}
+        {% if currentUser and comment.author._id.equals(currentUser) %}
         <p class="comment__title">You said:</p>
         {% else %}
         <p class="comment__title"><strong> {{comment.author.username}} said:</strong></p>

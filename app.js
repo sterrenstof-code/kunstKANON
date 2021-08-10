@@ -161,9 +161,8 @@ app.post("/register", async (req, res) => {
 
 app.get("/account", requireLogin, async (req, res) => {
   const user = await Users.findById(req.session.user_id);
-  const postsFromUser = await Posts.find({ author: user._id }).populate(
-    "author"
-  );
+  const postsFromUser = await Posts.find({ author: user._id }).populate({ path: "comments", populate: { path: "author" } })
+  .populate("author");
   res.render("pages/dashboard", { user, postsFromUser });
 });
 
