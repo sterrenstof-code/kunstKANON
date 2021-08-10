@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Image</title>
     <link rel="stylesheet" href="/style.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     {% include '../snippets/breadcrums.html' %}
     <h1>Add A Post</h1>
-    <form action="/" method="POST" >
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="username">
-        <label for="caption">Caption</label>
-        <input type="text" name="caption" id="caption" placeholder="caption">
-        <label for="image">Image upload</label>
-        <input type="text" id="image" name="image" placeholder="image">
-        <button>Submit</button>
+    <form action="/" method="POST">
+      <label for="title">title</label>
+      <input type="text" name="title" id="title" placeholder="title" />
+      <label for="caption">Text</label>
+      <input type="text" name="caption" id="caption" placeholder="caption" />
+      <label for="image">Image upload</label>
+      <input type="text" id="image" name="image" placeholder="image" />
+      <fieldset name="tags" id="tags" >      
+        <legend>Choose a tag</legend>    
+        {% for tag in tags %}  
+        <input type="checkbox" name="tags" value="{{tag}}">{{tag}}<br>     
+        {% endfor %}   
+    </fieldset>    
+      <button>Submit</button>
     </form>
-
-</body>
-
+  </body>
+  <script src="../../script.js"></script>
 </html>

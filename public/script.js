@@ -37,4 +37,9 @@ darkModeToggle.addEventListener('click', () => {
   }
 });
 
-
+const logoutPopUp = document.querySelector(".logout-pop-up");
+if(logoutPopUp){
+  setTimeout(() => {
+    logoutPopUp.style.display = "none";
+  }, 2000)
+}

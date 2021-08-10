@@ -14,6 +14,11 @@
     <div class="register__page">
     <div class="form__container">
         <h2>Login</h2>
+        {% if message.title %}
+    <div class="logout-pop-up">
+      <h3>{{message.title}}</h3>
+    </div>
+    {% endif %}
         <form action="/login" method="POST" class="form">
             <div class="group log-input">
 
@@ -33,5 +38,6 @@
     </div>
 
 </body>
+<script src="../../script.js"></script>
 
 </html>

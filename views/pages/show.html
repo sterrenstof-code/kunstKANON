@@ -9,6 +9,13 @@
 
   <body>
     {% include '../snippets/breadcrums.html' %}
-    {% include '../snippets/post.html' %}
+      {% if posts %}
+        {% for post in posts %}
+          {% include '../snippets/post.html' %}
+        {% endfor %}
+        {% elif post %}
+        {% include '../snippets/post.html' %}
+    {% endif %}
   </body>
+  <script src="../../script.js"></script>
 </html>

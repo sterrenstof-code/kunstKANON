@@ -14,8 +14,8 @@
     
     <h1>Edit Post</h1>
     <form action="/posts/{{post._id}}?_method=PUT" method="POST">
-        <label for="username">Post name</label>
-        <input type="text" name="username" id="username" placeholder="username" value="{{post.username}}">
+        <label for="title">Post title</label>
+        <input type="text" name="title" id="title" placeholder="title" value="{{post.title}}">
         <label for="caption">Post caption</label>
         <input type="text" name="caption" id="caption" placeholder="caption" value="{{post.caption}}">
         <label for="image">Select Image</label>
@@ -26,5 +26,6 @@
     <a href="/posts/{{post._id}}">Cancel</a>
 
 </body>
+<script src="../../script.js"></script>
 
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="/style.css" />
+
+</head>
+
+<body>
+    {% include '../snippets/breadcrums.html' %}
+   
+    <h3>Hi {{user.username}}</h3>
+    <h4>Here are all your posts</h4>
+    {% for post in postsFromUser %}
+      {% include '../snippets/post.html'%}
+    {% endfor %}
+</body>
+<script src="../../script.js"></script>
+
+</html>

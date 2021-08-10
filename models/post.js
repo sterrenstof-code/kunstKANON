@@ -1,25 +1,30 @@
-const Mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const Comments = new Mongoose.Schema({
+const Comments = new Schema({
   title: {
     type: String,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-  }
+  author: {
+    type: Schema.Types.ObjectId,
+    ref:"User"
+  },
 });
 
 var today  = new Date();
 
-const postSchema = new Mongoose.Schema({
-  username: {
+const postSchema = new Schema({
+  title: {
     type: String,
-    required: true,
+  },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref:"User"
   },
   caption: {
     type: String,
+    required: true,
   },
   image: {
     type: String,
@@ -32,6 +37,6 @@ const postSchema = new Mongoose.Schema({
   tags: [{type: String}],
 });
 
-const Post = Mongoose.model("Post", postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
