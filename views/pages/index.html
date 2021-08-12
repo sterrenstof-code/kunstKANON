@@ -109,6 +109,8 @@
         <section class="layout-grid__section">
           <article class="layout-grid__section__titlecontainer">
             <h2>{{post.title}}</h2>
+            {% include '../snippets/stars.html' %}
+    
             <p><a href="/authors/{{post.author._id}}"
               >see more from {{post.author.username}}</a
             ></p>

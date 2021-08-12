@@ -1,0 +1,14 @@
+<div class='stars-wrapper'>
+  {% set stars = post.totalStars  %}
+  {% set empty = 5 - stars %}
+<!-- {% for i in range(0, stars) -%}
+  <div class='star-filled'>&#9733;</div>
+{%- endfor %}
+{% for i in range(0, empty) -%}
+  <div class='star-empty'>&#9734;</div>
+{%- endfor %} -->
+<p class="starability-result" data-rating="{{stars}}">
+  Rating: {{stars}}
+</p>
+
+</div>

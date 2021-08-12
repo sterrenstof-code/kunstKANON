@@ -46,7 +46,6 @@ const isAuthor = async (req, res, next) => {
   next();
 };
 
-
 //custom helperfunctions
 
 const getTags = async () => {
@@ -161,8 +160,9 @@ app.post("/register", async (req, res) => {
 
 app.get("/account", requireLogin, async (req, res) => {
   const user = await Users.findById(req.session.user_id);
-  const postsFromUser = await Posts.find({ author: user._id }).populate({ path: "comments", populate: { path: "author" } })
-  .populate("author");
+  const postsFromUser = await Posts.find({ author: user._id })
+    .populate({ path: "comments", populate: { path: "author" } })
+    .populate("author");
   res.render("pages/dashboard", { user, postsFromUser });
 });
 
@@ -170,7 +170,9 @@ app.get("/posts/:id", async (req, res) => {
   const { id } = req.params;
   const post = await Posts.findById(id)
     .populate({ path: "comments", populate: { path: "author" } })
+    .populate({ path: "stars", populate: { path: "author" } })
     .populate("author");
+
   if (!post) {
     console.log("there are no posts by this name");
     return res.redirect("/");
@@ -182,8 +184,10 @@ app.get("/posts/:id", async (req, res) => {
 app.get("/tags/:tag", async (req, res) => {
   const posts = await Posts.find({}).populate("author");
   const { tag } = req.params;
-  const postsWithTag = await Posts.find({ tags: tag }).populate({ path: "comments", populate: { path: "author"} }).populate("author")
-.exec();
+  const postsWithTag = await Posts.find({ tags: tag })
+    .populate({ path: "comments", populate: { path: "author" } })
+    .populate("author")
+    .exec();
   res.render("pages/tag", {
     posts: posts,
     tag: tag,
@@ -214,9 +218,84 @@ app.post("/posts/:id/comment", async (req, res) => {
   const author = res.locals.currentUser;
   const { comment: title } = req.body;
   const added = await Posts.findByIdAndUpdate(id, {
-    $push: { comments: { title } },
-  });
+    $push: { comments: { title, author } },
+  })
+    .populate({ path: "comments", populate: { path: "author" } })
+    .populate("author");
+  await added.save();
   res.redirect(`/posts/${id}`);
+});
+
+app.post("/posts/:id/stars", requireLogin, async (req, res) => {
+  const { id } = req.params;
+  const currentUser = res.locals.currentUser;
+  let { stars } = req.body;
+  stars = Number(stars.stars);
+
+  const post = await Posts.findById(id);
+
+  let totalStars = 0;
+  for (let i = 0; i < post.stars.length; i++) {
+    totalStars += post.stars[i].stars;
+  }
+  totalStars = totalStars / post.stars.length;
+  totalStars = Math.floor(totalStars);
+  post.totalStars = totalStars;
+  await post.save();
+
+  //first check if the user is the owner of the text. If so, return
+  if (post.author.equals(req.session.user_id)) {
+    console.log("You are the author of this text");
+    return res.redirect(`/posts/${id}`);
+  }
+
+  //first check if this user already has a rating added.
+
+  let alreadyAdded = post.stars.filter((review) => {
+    return review.author._id.equals(req.session.user_id);
+  });
+
+      //find the index where the star is located to change the amount
+  var index = post.stars.indexOf(alreadyAdded);
+
+  let index2 = post.stars.findIndex( star => star.author._id === req.session.user_id );
+
+
+
+  console.log("this is already added: " + alreadyAdded, index);
+
+  //If not, then go ahead and add the ratings
+  if (!alreadyAdded.length) {
+    console.log("you have not added a review yet");
+    const added = await Posts.findByIdAndUpdate(id, {
+      $push: { stars: { stars, author: currentUser } },
+    })
+      .populate({ path: "stars", populate: { path: "author" } })
+      .populate("author");
+    const result = await added.save();
+    res.redirect(`/posts/${id}`);
+  } else {
+    //if so, then replace the rating based on the id
+    console.log("you already have added a review!");
+    const { stars: newStar } = req.body;
+    const newStarPost = Number(newStar.stars);
+    //find the right object.
+    const starsId = alreadyAdded[0]._id;
+
+    //change the value
+    
+
+    post.stars[1].stars = newStarPost
+    const res = await post.save();
+    console.log(post)
+    // console.log(foundPost);
+    // foundPost.stars = newStarPost;
+    // const updated = await foundPost.save();
+    // console.log(updated);
+    res.redirect(`/posts/${id}`);
+  }
+
+  //
 });
 
 app.put("/posts/:id", requireLogin, isAuthor, async (req, res) => {

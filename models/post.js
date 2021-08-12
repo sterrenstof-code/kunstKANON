@@ -12,6 +12,14 @@ const Comments = new Schema({
   },
 });
 
+const Stars = new Schema({
+  stars: Number,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref:"User"
+  }
+});
+
 var today  = new Date();
 
 const postSchema = new Schema({
@@ -25,7 +33,7 @@ const postSchema = new Schema({
   caption: {
     type: String,
     required: true,
-  },
+  }, 
   image: {
     type: String,
   },
@@ -33,10 +41,14 @@ const postSchema = new Schema({
     type: Date,
     default: today.toLocaleDateString(),
   },
+  totalStars: Number,
   comments: [Comments],
+  stars: [Stars],
   tags: [{type: String}],
 });
 
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
+
+

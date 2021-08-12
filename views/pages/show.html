@@ -11,9 +11,11 @@
     {% include '../snippets/breadcrums.html' %}
       {% if posts %}
         {% for post in posts %}
+        {% set ratings = false %}
           {% include '../snippets/post.html' %}
         {% endfor %}
         {% elif post %}
+        {% set ratings = true %}
         {% include '../snippets/post.html' %}
     {% endif %}
   </body>

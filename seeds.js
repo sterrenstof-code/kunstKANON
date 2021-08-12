@@ -39,6 +39,17 @@ const seedPosts = [
                 author: "610865fc10a998913d4e2f5d"
             }
         ],
+        totalStars: 2,
+        stars: [
+            {
+                stars: 3,
+                author: "611256a54a30ba3bcb93466e"
+            },
+            {
+                stars: 2,
+                author: "610865fc10a998913d4e2f5d"
+            }
+        ],
         tags: ["drama", "romance", "teen", "fiction"]
     },
     {
@@ -50,9 +61,16 @@ const seedPosts = [
             {
                 title: "first comment title",
                 author: "610865fc10a998913d4e2f5d"
+            }
+        ],
+        totalStars: 1,
+        stars: [
+            {
+                stars: 1,
+                author: "611256a54a30ba3bcb93466e"
             },
             {
-                title: "second comment title",
+                stars: 2,
                 author: "610865fc10a998913d4e2f5d"
             }
         ],
@@ -66,11 +84,22 @@ const seedPosts = [
         comments: [
             {
                 title: "first comment title",
-                author: "611256a54a30ba3bcb93466e"
+                author: "610865fc10a998913d4e2f5d"
             },
             {
                 title: "second comment title",
                 author: "611256a54a30ba3bcb93466e"
+            }
+        ],
+        totalStars: 3,
+        stars: [
+            {
+                stars: 3,
+                author: "611256a54a30ba3bcb93466e"
+            },
+            {
+                stars: 4,
+                author: "610865fc10a998913d4e2f5d"
             }
         ],
         tags: ["drama", "romance", "teen", "fiction"]
@@ -87,6 +116,17 @@ const seedPosts = [
             },
             {
                 title: "second comment title",
+                author: "610865fc10a998913d4e2f5d"
+            }
+        ],
+        totalStars: 4,
+        stars: [
+            {
+                stars: 5,
+                author: "610865fc10a998913d4e2f5d"
+            },
+            {
+                stars: 4,
                 author: "611256a54a30ba3bcb93466e"
             }
         ],
@@ -100,10 +140,21 @@ const seedPosts = [
         comments: [
             {
                 title: "first comment title",
-                author: "611256a54a30ba3bcb93466e"
+                author: "610865fc10a998913d4e2f5d"
             },
             {
                 title: "second comment title",
+                author: "611256a54a30ba3bcb93466e"
+            }
+        ],
+        totalStars: 0,
+        stars: [
+            {
+                stars: 5,
+                author: "610865fc10a998913d4e2f5d"
+            },
+            {
+                stars: 4,
                 author: "611256a54a30ba3bcb93466e"
             }
         ],
