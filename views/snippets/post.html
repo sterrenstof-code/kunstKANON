@@ -8,7 +8,9 @@
     <img class="post-container__image" src="{{post.image}}" alt="" />
   <div class="post-container__tags">
     {% for tag in post.tags %}
-      <p class="tag-light"><a href="/tags/{{tag}}">{{tag}}</a></p>
+      <button class="mouse-cursor-gradient-tracking tag-light">
+        <a href="/tags/{{tag}}">{{tag}}</a>
+      </button>
     {% endfor %}
 
   
@@ -29,7 +31,9 @@
           <input type="radio" id="first-rate5" name="stars[stars]" value=5 />
           <label for="first-rate5" title="Amazing">5 stars</label>
         </fieldset>
-        <button>Add stars</button>
+        <button class="mouse-cursor-gradient-tracking">
+          <span>Add Stars</span>
+        </button>
       </form> 
       {% endif %}
 
@@ -37,7 +41,9 @@
     <div class="post-container__edit">
       <a  href="/posts/{{post._id}}/edit">Edit Product</a>
       <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
-        <button>Delete</button>
+        <button class="mouse-cursor-gradient-tracking">
+          <span>Delete</span>
+        </button>
       </form>
     </div>
     {% endif %}
@@ -58,7 +64,9 @@
           action="/posts/{{post.id}}/comment/{{comment._id}}?_method=DELETE"
           method="POST"
         >
-          <button class="">Delete</button>
+        <button class="mouse-cursor-gradient-tracking">
+          <span>Delete</span>
+        </button>
         </form>
         {% endif %}
 
@@ -74,7 +82,9 @@
           id="comment"
           placeholder="comment"
         />
-        <button>Add comment</button>
+        <button class="mouse-cursor-gradient-tracking">
+          <span>Add Comment</span>
+        </button>
       </form> 
       {% endif %}
       

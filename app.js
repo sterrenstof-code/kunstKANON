@@ -284,14 +284,9 @@ app.post("/posts/:id/stars", requireLogin, async (req, res) => {
 
     //change the value
     
-
     post.stars[1].stars = newStarPost
     const res = await post.save();
     console.log(post)
-    // console.log(foundPost);
-    // foundPost.stars = newStarPost;
-    // const updated = await foundPost.save();
-    // console.log(updated);
     res.redirect(`/posts/${id}`);
   }
 

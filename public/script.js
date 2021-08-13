@@ -1,7 +1,7 @@
 // check for saved 'darkMode' in localStorage
 let darkMode = localStorage.getItem('darkMode'); 
 
-const darkModeToggle = document.querySelector('#dark-mode-toggle');
+const darkModeToggle = document.querySelector('.dark-mode-toggle');
 
 const enableDarkMode = () => {
   // 1. Add the class to the body
@@ -24,18 +24,21 @@ if (darkMode === 'enabled') {
 }
 
 // When someone clicks the button
-darkModeToggle.addEventListener('click', () => {
-  // get their darkMode setting
-  darkMode = localStorage.getItem('darkMode'); 
-  
-  // if it not current enabled, enable it
-  if (darkMode !== 'enabled') {
-    enableDarkMode();
-  // if it has been enabled, turn it off  
-  } else {  
-    disableDarkMode(); 
-  }
-});
+if(darkModeToggle){
+  darkModeToggle.addEventListener('click', () => {
+    // get their darkMode setting
+    darkMode = localStorage.getItem('darkMode'); 
+    
+    // if it not current enabled, enable it
+    if (darkMode !== 'enabled') {
+      enableDarkMode();
+    // if it has been enabled, turn it off  
+    } else {  
+      disableDarkMode(); 
+    }
+  });
+}
+
 
 const logoutPopUp = document.querySelector(".logout-pop-up");
 if(logoutPopUp){
@@ -43,3 +46,14 @@ if(logoutPopUp){
     logoutPopUp.style.display = "none";
   }, 2000)
 }
+
+let btn = document.querySelectorAll('.mouse-cursor-gradient-tracking');
+btn.forEach((item)=> {
+  item.addEventListener('mousemove', e => {
+    let rect = e.target.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+    item.style.setProperty('--x', x + 'px');
+    item.style.setProperty('--y', y + 'px');
+  });
+})
