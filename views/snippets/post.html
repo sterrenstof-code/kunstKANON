@@ -1,45 +1,57 @@
+<h1 class="post-container__title">{{post.title}}</h1>
+
 <div class="post-container">
-  <h3 class="post-container__text">{{post.title}}</h3>
-    <p class="post-container__text">{{post.caption}}</p>
-    <h4>Written by 
+  <div class="post-container__left">
+    <img class="post-container__image" src="{{post.image}}" alt="" />
+    <h4>
+      Written by
       <a href="/authors/{{post.author._id}}">{{post.author.username}}</a>
     </h4>
     {% include './stars.html' %}
-    <img class="post-container__image" src="{{post.image}}" alt="" />
-  <div class="post-container__tags">
-    {% for tag in post.tags %}
+    <div class="post-container__tags">
+      {% for tag in post.tags %}
       <button class="mouse-cursor-gradient-tracking tag-light">
         <a href="/tags/{{tag}}">{{tag}}</a>
       </button>
-    {% endfor %}
-
-  
-  </div>
-
-  {% if currentUser and ratings and not post.author.equals(currentUser) %}
-       <form action="/posts/{{post.id}}/stars" method="POST">
-        <fieldset class="starability-basic">
-          <input type="radio" id="no-rate" class="input-no-rate" name="stars[stars]" value=0 checked aria-label="No rating." />
-          <input type="radio" id="first-rate1" name="stars[stars]" value=1 />
-          <label for="first-rate1" title="Terrible">1 star</label>
-          <input type="radio" id="first-rate2" name="stars[stars]" value=2 />
-          <label for="first-rate2" title="Not good">2 stars</label>
-          <input type="radio" id="first-rate3" name="stars[stars]" value=3 />
-          <label for="first-rate3" title="Average">3 stars</label>
-          <input type="radio" id="first-rate4" name="stars[stars]" value=4 />
-          <label for="first-rate4" title="Very good">4 stars</label>
-          <input type="radio" id="first-rate5" name="stars[stars]" value=5 />
-          <label for="first-rate5" title="Amazing">5 stars</label>
-        </fieldset>
-        <button class="mouse-cursor-gradient-tracking">
-          <span>Add Stars</span>
-        </button>
-      </form> 
-      {% endif %}
-
-    {% if currentUser and post.author.equals(currentUser) %}
+      {% endfor %}
+    </div>
+    <div class="post-container__keywords">
+      {% for keyword in post.keywords %}
+      <button class="mouse-cursor-gradient-tracking keyword">
+        <a href="/tags/{{keyword}}">{{keyword}}</a>
+      </button>
+      {% endfor %}
+    </div>
+    {% if currentUser and ratings and not post.author.equals(currentUser) %}
+    <form action="/posts/{{post.id}}/stars" method="POST">
+      <fieldset class="starability-basic">
+        <input
+          type="radio"
+          id="no-rate"
+          class="input-no-rate"
+          name="stars[stars]"
+          value="0"
+          checked
+          aria-label="No rating."
+        />
+        <input type="radio" id="first-rate1" name="stars[stars]" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="stars[stars]" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="stars[stars]" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="stars[stars]" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="stars[stars]" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+      <button class="mouse-cursor-gradient-tracking">
+        <span>Add Stars</span>
+      </button>
+    </form>
+    {% endif %} {% if currentUser and post.author.equals(currentUser) %}
     <div class="post-container__edit">
-      <a  href="/posts/{{post._id}}/edit">Edit Product</a>
+      <a href="/posts/{{post._id}}/edit">Edit Product</a>
       <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
         <button class="mouse-cursor-gradient-tracking">
           <span>Delete</span>
@@ -47,16 +59,18 @@
       </form>
     </div>
     {% endif %}
- 
+
     <div class="post-container__comment-container">
       {% for comment in post.comments %}
       <div class="comment">
         {% if currentUser and comment.author._id.equals(currentUser) %}
         <p class="comment__title">You said:</p>
         {% else %}
-        <p class="comment__title"><strong> {{comment.author.username}} said:</strong></p>
+        <p class="comment__title">
+          <strong> {{comment.author.username}} said:</strong>
+        </p>
         {% endif %}
-  
+
         <p class="comment__title">{{comment.title}}</p>
 
         {% if currentUser and comment.author.equals(currentUser) %}
@@ -64,29 +78,29 @@
           action="/posts/{{post.id}}/comment/{{comment._id}}?_method=DELETE"
           method="POST"
         >
-        <button class="mouse-cursor-gradient-tracking">
-          <span>Delete</span>
-        </button>
+          <button class="mouse-cursor-gradient-tracking">
+            <span>Delete</span>
+          </button>
         </form>
         {% endif %}
-
       </div>
-      {% endfor %}
-
-      {% if currentUser %}
-       <form action="/posts/{{post.id}}/comment/" method="POST">
+      {% endfor %} {% if currentUser %}
+      <form action="/posts/{{post.id}}/comment/" method="POST">
         <label for="comment">Comment</label>
-        <input
-          type="text"
-          name="comment"
-          id="comment"
-          placeholder="comment"
-        />
+        <input type="text" name="comment" id="comment" placeholder="comment" />
         <button class="mouse-cursor-gradient-tracking">
           <span>Add Comment</span>
         </button>
-      </form> 
+      </form>
       {% endif %}
-      
     </div>
+  </div>
+
+  <div class="post-container__right">
+    <p class="post-container__text">
+      {% if not ratings %}
+      <a href="/posts/{{post._id}}" class="max-lines">{{post.caption}}</a>
+      {% else %} {{post.caption}} {% endif %}
+    </p>
+  </div>
 </div>

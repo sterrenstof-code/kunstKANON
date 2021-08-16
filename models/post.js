@@ -37,13 +37,10 @@ const postSchema = new Schema({
   image: {
     type: String,
   },
-  updated: {
-    type: Date,
-    default: today.toLocaleDateString(),
-  },
   totalStars: Number,
   comments: [Comments],
   stars: [Stars],
+  keywords: [{type: String}],
   tags: [{type: String}],
 });
 

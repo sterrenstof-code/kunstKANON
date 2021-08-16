@@ -20,8 +20,10 @@ nunjucks.configure(["views"], {
 });
 app.use(session({ secret: "not a good secret" }));
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   res.locals.currentUser = req.session.user_id;
+  const loggedUser = await Users.findById(req.session.user_id);
+  res.locals.loggedUser = loggedUser;
   next();
 });
 
@@ -58,6 +60,17 @@ const getTags = async () => {
   return tags;
 };
 
+const getKeywords = async () => {
+  const posts = await Posts.find({});
+  const keywordsList = [];
+  posts.forEach((post) => {
+    keywordsList.push(...post.keywords);
+  });
+  const keywords = new Set(keywordsList);
+  return keywords;
+};
+
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "html");
 app.set("port", process.env.PORT || 3000);
@@ -82,8 +95,9 @@ app.get("/", async (req, res) => {
   const posts = await Posts.find({}).populate("author");
   const users = await Users.find({});
   const tags = await getTags();
+  const keywords = await getKeywords();
   const loggedUser = await Users.findById(req.session.user_id);
-  res.render("pages/index", { posts, tags, users, loggedUser });
+  res.render("pages/index", { posts, tags, keywords, users, loggedUser });
 });
 
 app.get("/logout", async (req, res) => {
@@ -195,6 +209,17 @@ app.get("/tags/:tag", async (req, res) => {
   });
 });
 
+app.get("/keywords/:keyword", async (req, res) => {
+  const posts = await Posts.find({});
+  const { keyword } = req.params;
+  const postsWithKeyword = await Posts.find({ keywords: keyword });
+  res.render("pages/tag", {
+    posts: posts,
+    keyword,
+    postsWithTag: postsWithKeyword,
+  });
+});
+
 app.get("/authors/:author_id", async (req, res) => {
   const { author_id } = req.params;
   const posts = await Posts.find({ author: { _id: author_id } })
@@ -286,7 +311,7 @@ app.post("/posts/:id/stars", requireLogin, async (req, res) => {
     
     post.stars[1].stars = newStarPost
     const res = await post.save();
-    console.log(post)
+  
     res.redirect(`/posts/${id}`);
   }
 

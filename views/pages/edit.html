@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    {% include '../snippets/header.html' %} 
     {% include '../snippets/breadcrums.html' %}
     
     <h1>Edit Post</h1>
@@ -20,7 +21,9 @@
         <input type="text" name="caption" id="caption" placeholder="caption" value="{{post.caption}}">
         <label for="image">Select Image</label>
         <input type="text" id="image" name="image" placeholder="image" value="{{post.image}}">    
-        <button>Submit</button>
+        <button class="mouse-cursor-gradient-tracking">
+            <span>Submit</span>
+          </button>
     </form>
 
     <a href="/posts/{{post._id}}">Cancel</a>

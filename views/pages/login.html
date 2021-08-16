@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    {% include '../snippets/header.html' %} 
     {% include '../snippets/breadcrums.html' %}
     <div class="register__page">
     <div class="form__container">
@@ -28,7 +29,7 @@
             
                 <input type="password" name="password" id="password" placeholder="password" required>
             </div>
-            <div class="container-log-btn">
+            <div class="container-log-btn ">
                 <button type="submit" name = "btn_submit" class="log-form-btn mouse-cursor-gradient-tracking">
                   <span>Login</span>
                 </button>

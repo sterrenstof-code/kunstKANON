@@ -57,3 +57,23 @@ btn.forEach((item)=> {
     item.style.setProperty('--y', y + 'px');
   });
 })
+
+function processForm(e) {
+  if (e.preventDefault) e.preventDefault();
+  const searchContainer = document.createElement("div");  
+  searchContainer.innerHTML = "CLICK ME"; 
+  searchContainer.classList.add("searchContainer"); 
+  const searchContainerRoot = document.querySelector(".searchContainer__root");             
+  searchContainerRoot.appendChild(searchContainer); 
+  /* do what you want with the form */
+
+  // You must return false to prevent the default form behavior
+  return false;
+}
+
+var form = document.querySelector('.search');
+if (form.attachEvent) {
+  form.attachEvent("submit", processForm);
+} else {
+  form.addEventListener("submit", processForm);
+}

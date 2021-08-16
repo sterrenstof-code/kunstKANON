@@ -8,16 +8,20 @@
   </head>
 
   <body>
+    {% include '../snippets/header.html' %} 
     {% include '../snippets/breadcrums.html' %}
+      
+    <div class="post-container__container">
       {% if posts %}
-        {% for post in posts %}
-        {% set ratings = false %}
-          {% include '../snippets/post.html' %}
-        {% endfor %}
-        {% elif post %}
-        {% set ratings = true %}
+      {% for post in posts %}
+      {% set ratings = false %}
         {% include '../snippets/post.html' %}
-    {% endif %}
+      {% endfor %}
+      {% elif post %}
+      {% set ratings = true %}
+      {% include '../snippets/post.html' %}
+  {% endif %}
+    </div>
   </body>
   <script src="../../script.js"></script>
 </html>
