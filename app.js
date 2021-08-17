@@ -100,6 +100,12 @@ app.get("/", async (req, res) => {
   res.render("pages/index", { posts, tags, keywords, users, loggedUser });
 });
 
+app.get('/getData', async function(req, res) {
+  const posts = await Posts.find({}).populate("author");
+  console.log(posts);
+  res.json(posts);
+})
+
 app.get("/logout", async (req, res) => {
   req.session.destroy();
   const posts = await Posts.find({});

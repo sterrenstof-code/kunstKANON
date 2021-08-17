@@ -77,3 +77,53 @@ if (form.attachEvent) {
 } else {
   form.addEventListener("submit", processForm);
 }
+
+//get posts data from express server
+
+const getPostData = async () => {
+  let response = await fetch('/getData')
+  let responseJson = await response.json()
+  console.log(responseJson);
+}
+
+getPostData();
+
+// variables
+var input = document.querySelector('.search__input');
+var people = ['john doe', 'maria', 'paul', 'george', 'jimmy'];
+var results;
+
+// functions
+function autocomplete(val) {
+  var people_return = [];
+
+  for (i = 0; i < people.length; i++) {
+    if (val === people[i].slice(0, val.length)) {
+      people_return.push(people[i]);
+    }
+  }
+
+  return people_return;
+}
+
+// events
+input.onkeyup = function(e) {
+  input_val = this.value; // updates the variable on each ocurrence
+
+  if (input_val.length > 0) {
+    var people_to_show = [];
+
+    autocomplete_results = document.querySelector(".searchContainer__root");
+    autocomplete_results.innerHTML = '';
+    people_to_show = autocomplete(input_val);
+    
+    for (i = 0; i < people_to_show.length; i++) {
+      autocomplete_results.innerHTML += '<li><a href="http://www.bbc.co.uk/">' + people_to_show[i] + '</a></li>';
+
+    }
+    autocomplete_results.style.display = 'block';
+  } else {
+    people_to_show = [];
+    autocomplete_results.innerHTML = '';
+  }
+}

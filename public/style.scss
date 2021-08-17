@@ -40,6 +40,9 @@ $border1pxSolidColor: 1px solid rgba(0, 0, 0, 0.521);
 // thick soft line
 $border2pxSolidColor: 2px solid rgba(173, 173, 173, 0.295);
 
+// background overlay
+$focus-overlay: rgba(0, 0, 0, 0.1);
+
 //general styling
 
 * {
@@ -95,7 +98,7 @@ h3 {
 .first-letter:first-child::first-letter {
   color: var(--clr-accent);
   float: left;
-  margin: 0 2px 0 4px;
+  margin: 0 2px -2px 4px;
   font-size: 1.5rem;
   font-weight: bold;
   line-height: 1;
@@ -483,7 +486,7 @@ header {
   justify-content: space-between;
   align-items: center;
   & > * {
-    flex: 0 1 300px;
+    flex: 0 1 400px;
   }
   .member {
     display: flex;
@@ -494,6 +497,12 @@ header {
       margin: 0.5rem 2rem 0.5rem 0;
     }
   }
+}
+
+.dashboard__header {
+  position: relative;
+  top: 140px;
+  padding: 1rem;
 }
 
 .layout-grid {
@@ -577,23 +586,6 @@ header {
   }
 }
 
-@media screen and (min-width: 600px) {
-  .card-tall {
-    grid-row: span 2 / auto;
-  }
-
-  .card-wide {
-    grid-column: span 2 / auto;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .layout-grid__container__left {
-    position: relative;
-    padding: 2rem;
-  }
-}
-
 .register__page {
   text-align: center;
   position: relative;
@@ -643,12 +635,7 @@ header {
 .searchContainer__root {
   position: relative;
   top: 90px;
-  height: 0;
-
-  .searchContainer {
-    background-color: red;
-    transition: width 0.3s ease-out;
-  }
+  background-color: red;
 }
 
 .search {
@@ -659,6 +646,17 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  #autocomplete-results {
+    display: none;
+    width: 100%;
+    margin-top: -2px;
+    color: var(--foreground);
+
+    li {
+      width: 100%;
+      padding: 20px 15px;
+    }
+  }
   &__input {
     position: relative;
     display: inline-block;
@@ -710,6 +708,7 @@ header {
     flex: 1 1 400px;
     padding: 6rem;
   }
+
   &__left {
     align-self: flex-start;
     position: sticky;
@@ -720,6 +719,9 @@ header {
       margin: 10rem 0;
       object-fit: contain;
     }
+    h4 {
+      border-bottom: $border2pxSolidColor;
+    }
     & > * {
       padding: 1rem 0;
     }
@@ -728,11 +730,15 @@ header {
   &__right {
   }
   &__edit {
+    border-top: $border2pxSolidColor;
+    border-bottom: $border2pxSolidColor;
   }
 
   &__tags {
     margin: 1rem 0 0;
     padding-bottom: 0;
+    font-size: 0.9rem;
+    font-weight: bold;
     .tag-light {
       margin: 0.1rem 0.2rem 0.1rem 0;
     }
@@ -741,20 +747,57 @@ header {
   &__keywords {
     margin: 0;
     padding-bottom: 2rem;
+
     .keyword {
+      text-transform: uppercase;
       margin: 0.1rem 0.2rem 0.1rem 0;
-      
       background-color: var(--foreground);
       color: var(--background);
       padding: 0.3rem 0.6rem;
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
   }
 
-  &__image {
-  }
-
   &__comment-container {
+    border-bottom: $border2pxSolidColor;
+    h2 {
+      margin-bottom: 2.5rem;
+    }
+    .comment {
+      margin-top: 1rem;
+      &__title {
+        strong {
+          vertical-align: middle;
+        }
+      }
+      &__subtitle {
+        padding-left: 2rem;
+      }
+    }
+    .comment-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+      position: relative;
+      background: var(--foreground);
+      & > * {
+        flex: 1 1 200px;
+        margin: 0.5rem 0;
+      }
+      input {
+        padding: 0.7rem 1rem;
+        border: 2px solid rgba(173, 173, 173, 0.295);
+      }
+      font-size: 1.2rem;
+      color: var(--background);
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+      color: var(--foreground);
+      background-color: var(--background);
+    }
   }
 }
 
@@ -766,4 +809,27 @@ header {
   -webkit-box-orient: vertical;
   margin: 0.5em 0 1.5em;
   font-weight: 400;
+}
+
+//media queries
+
+@media screen and (min-width: 600px) {
+  .card-tall {
+    grid-row: span 2 / auto;
+  }
+
+  .card-wide {
+    grid-column: span 2 / auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .layout-grid__container__left {
+    position: relative;
+    padding: 2rem;
+  }
+  .post-container > * {
+    padding: 1rem;
+    position: relative;
+  }
 }

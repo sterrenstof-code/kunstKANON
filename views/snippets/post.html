@@ -18,7 +18,7 @@
     <div class="post-container__keywords">
       {% for keyword in post.keywords %}
       <button class="mouse-cursor-gradient-tracking keyword">
-        <a href="/tags/{{keyword}}">{{keyword}}</a>
+        <a href="/tags/{{keyword}}">&zigrarr; {{keyword}}</a>
       </button>
       {% endfor %}
     </div>
@@ -61,17 +61,18 @@
     {% endif %}
 
     <div class="post-container__comment-container">
+      <h2>Comments</h2>
       {% for comment in post.comments %}
       <div class="comment">
         {% if currentUser and comment.author._id.equals(currentUser) %}
-        <p class="comment__title">You said:</p>
+        <p class="comment__title first-letter"><strong>You said:</strong></p>
         {% else %}
-        <p class="comment__title">
-          <strong> {{comment.author.username}} said:</strong>
+        <p class="comment__title first-letter">
+          <strong>{{comment.author.username}} said:</strong>
         </p>
         {% endif %}
 
-        <p class="comment__title">{{comment.title}}</p>
+        <p class="comment__subtitle">{{comment.title}}</p>
 
         {% if currentUser and comment.author.equals(currentUser) %}
         <form
@@ -85,11 +86,11 @@
         {% endif %}
       </div>
       {% endfor %} {% if currentUser %}
-      <form action="/posts/{{post.id}}/comment/" method="POST">
-        <label for="comment">Comment</label>
+      <form action="/posts/{{post.id}}/comment/" method="POST" class="comment-form">
+        <label for="comment">What did you think?</label>
         <input type="text" name="comment" id="comment" placeholder="comment" />
         <button class="mouse-cursor-gradient-tracking">
-          <span>Add Comment</span>
+          <span>Add comment</span>
         </button>
       </form>
       {% endif %}
