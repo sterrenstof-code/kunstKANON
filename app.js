@@ -21,6 +21,7 @@ nunjucks.configure(["views"], {
 app.use(session({ secret: "not a good secret" }));
 
 app.use(async (req, res, next) => {
+  const postsList = await Posts.find({});
   res.locals.currentUser = req.session.user_id;
   const loggedUser = await Users.findById(req.session.user_id);
   res.locals.loggedUser = loggedUser;
@@ -102,7 +103,6 @@ app.get("/", async (req, res) => {
 
 app.get('/getData', async function(req, res) {
   const posts = await Posts.find({}).populate("author");
-  console.log(posts);
   res.json(posts);
 })
 
@@ -120,6 +120,10 @@ app.get("/logout", async (req, res) => {
 app.get("/posts", async (req, res) => {
   const posts = await Posts.find({});
   res.render("pages/index", { posts: posts });
+});
+
+app.get("/search", async (req, res) => {
+  res.render("pages/search");
 });
 
 app.post("/", requireLogin, async (req, res) => {
