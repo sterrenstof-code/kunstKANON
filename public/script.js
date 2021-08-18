@@ -94,15 +94,18 @@ const populateFilters = async () => {
   let totalStars = [];
   let authors = [];
   const dataMining = data.map((post) => {
+    console.log(post, totalStars);
     tags.push(...post.tags);
     keywords.push(...post.keywords);
     totalStars.push(post.totalStars);
     authors.push(post.author.username);
   });
+  
   tags = [...new Set(tags)];
   keywords = [...new Set(keywords)];
   totalStars = [...new Set(totalStars)];
   totalStars = totalStars.sort();
+  
   authors = [...new Set(authors)];
   displayFilters(tags, "tags");
   displayFilters(keywords, "keywords");
@@ -113,8 +116,12 @@ const populateFilters = async () => {
 
 const displayFilters = (data, element, displayStars = false) => {
   const root = document.querySelector(`.${element}`);
+  if(!root){
+    return 
+  }
   const header = element.toUpperCase();
   root.innerHTML += `<h4>${header}</h4>`;
+ 
   for (item of data) {
     const element = document.createElement("div");
     if (displayStars) {

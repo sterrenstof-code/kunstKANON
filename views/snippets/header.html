@@ -1,17 +1,17 @@
 <header>
   <div class="logo">
-    <p><a href="/">KunstKANON</a></p>
+    <p class="tag-light"><a href="/">KunstKANON</a></p>
   </div>
 
 
 
   <div class="member">
     {% if loggedUser %}
-    <p class="tag-light">Hello, {{loggedUser.username}}!</p>
-    <a href="/logout">Logout</a>
+    <p class="tag-light"><a href="/account">Hello, {{loggedUser.username}}!</a></p>
+    <a href="/logout" class="tag-light">Logout</a>
     {% else %}
-    <a href="/login" class="accent">Login</a>
-    <a href="/register" class="accent">Register</a>
+    <a href="/login" class="accent tag-light">Login</a>
+    <a href="/register" class="accent tag-light">Register</a>
     {% endif %}
 
     <input type="checkbox" id="toggle" class="offscreen dark-mode-toggle" />

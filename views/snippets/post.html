@@ -10,16 +10,15 @@
     {% include './stars.html' %}
     <div class="post-container__tags">
       {% for tag in post.tags %}
-      <button class="mouse-cursor-gradient-tracking tag-light">
-        <a href="/tags/{{tag}}">{{tag}}</a>
-      </button>
+        <p class="tag-light" ><a href="/tags/{{tag}}">{{tag}}</a>
+        </p>
       {% endfor %}
     </div>
     <div class="post-container__keywords">
       {% for keyword in post.keywords %}
-      <button class="mouse-cursor-gradient-tracking keyword">
-        <a href="/tags/{{keyword}}">&zigrarr; {{keyword}}</a>
-      </button>
+      
+       <p class="tag-light keyword"><a href="/keywords/{{keyword}}">{{keyword}}</a>
+       </p>
       {% endfor %}
     </div>
     {% if currentUser and ratings and not post.author.equals(currentUser) %}
@@ -98,7 +97,7 @@
   </div>
 
   <div class="post-container__right">
-    <p class="post-container__text">
+    <p class="post-container__text first-letter">
       {% if not ratings %}
       <a href="/posts/{{post._id}}" class="max-lines">{{post.caption}}</a>
       {% else %} {{post.caption}} {% endif %}

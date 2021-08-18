@@ -10,12 +10,13 @@
   <body>
     {% include '../snippets/header.html' %} 
     {% include '../snippets/breadcrums.html' %}
-    <h2 class="tag__container">All about {{keyword}}</h2>
+    <h2 class="tag__container">All about {{tag}}{{keyword}}</h2>
     <div class="post-container__container">
     {% for post in postsWithTag %}
       {% include '../snippets/post.html' %}
     {% endfor %}
     </div>
+    
   </body>
   <script src="../../script.js"></script>
 </html>
