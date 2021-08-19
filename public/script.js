@@ -89,23 +89,23 @@ const getPostData = async () => {
 
 const populateFilters = async () => {
   const data = await getPostData();
+  displayResults(data);
   let tags = [];
   let keywords = [];
   let totalStars = [];
   let authors = [];
   const dataMining = data.map((post) => {
-    console.log(post, totalStars);
     tags.push(...post.tags);
     keywords.push(...post.keywords);
     totalStars.push(post.totalStars);
     authors.push(post.author.username);
   });
-  
+
   tags = [...new Set(tags)];
   keywords = [...new Set(keywords)];
   totalStars = [...new Set(totalStars)];
   totalStars = totalStars.sort();
-  
+
   authors = [...new Set(authors)];
   displayFilters(tags, "tags");
   displayFilters(keywords, "keywords");
@@ -116,12 +116,12 @@ const populateFilters = async () => {
 
 const displayFilters = (data, element, displayStars = false) => {
   const root = document.querySelector(`.${element}`);
-  if(!root){
-    return 
+  if (!root) {
+    return;
   }
   const header = element.toUpperCase();
   root.innerHTML += `<h4>${header}</h4>`;
- 
+
   for (item of data) {
     const element = document.createElement("div");
     if (displayStars) {
@@ -149,11 +149,10 @@ const activeFilterBtns = (data) => {
 };
 
 const displayResults = (dataObj) => {
- 
   const root = document.querySelector(`.searchContainer__root`);
   root.innerHTML = "";
-  if(!dataObj.length){
-    return root.innerHTML = "<h4>Your result yielded no results</h4>";
+  if (!dataObj.length) {
+    return (root.innerHTML = "<h4>Your result yielded no results</h4>");
   }
   dataObj.forEach((post) => {
     const { _id: id, title, image, caption: text } = post;
@@ -185,27 +184,34 @@ const displayResults = (dataObj) => {
 const showFilteredResults = (filterButtons, data) => {
   //show all posts
   // displayResults(data);
- 
+
   //Get all the values from the filter
   const filteredBtnsArray = [];
   filterButtons.forEach((button) => {
-    let stars = Number(button.getAttribute('stars'));
-    return stars ? filteredBtnsArray.push(stars) : filteredBtnsArray.push(button.innerHTML);
-  })
-  
+    let stars = Number(button.getAttribute("stars"));
+    return stars
+      ? filteredBtnsArray.push(stars)
+      : filteredBtnsArray.push(button.innerHTML);
+  });
+
   //for every category of filters, filter the data
   // for every post, if you can find the button in tags or keywords or author give it back
   const newData = data.filter((post) => {
     //check for every post if all of the filter buttons exist in the post.tags or post.keywords arrays
-      //make a list of all the tags, keywords and authors
-      const searchList = [...post.tags, ...post.keywords, post.author.username, post.totalStars]
-     
-      //if all of the filters exist in that list, return the post
+    //make a list of all the tags, keywords and authors
+    const searchList = [
+      ...post.tags,
+      ...post.keywords,
+      post.author.username,
+      post.totalStars,
+    ];
+
+    //if all of the filters exist in that list, return the post
     const allfiltersApply = filteredBtnsArray.every((filter) => {
-      return searchList.includes(filter) 
-    })
+      return searchList.includes(filter);
+    });
     return allfiltersApply;
-  })
+  });
 
   displayResults(newData);
 };
@@ -285,12 +291,11 @@ function autocomplete(val) {
 //   });
 // }
 
-
 var acc = document.querySelectorAll(".search-accordion");
 var i;
 
 for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
+  acc[i].addEventListener("click", function () {
     /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
     this.classList.toggle("active");

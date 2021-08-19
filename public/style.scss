@@ -7,6 +7,7 @@
   --clr-grey: #dbd4cc;
   --clr-light: #f8f7f5;
   --clr-dark: #171617;
+  // rgb(63, 69, 54)
   --clr-primary: #f1e0e0;
   --clr-secondary: #a59590;
   --clr-accent: #f55951;
@@ -118,6 +119,47 @@ h3 {
   color: var(--clr-accent);
 }
 
+.mouse-cursor-gradient-tracking {
+  position: relative;
+  background: var(--foreground);
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+  color: var(--background);
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  color: var(--foreground);
+  background-color: var(--background);
+  border: $border2pxSolidColor;
+}
+
+.mouse-cursor-gradient-tracking span {
+  position: relative;
+}
+
+.mouse-cursor-gradient-tracking:before {
+  --size: 0;
+  content: "";
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  background: radial-gradient(
+    circle closest-side,
+    var(--clr-accent),
+    transparent
+  );
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+.mouse-cursor-gradient-tracking:hover:before {
+  --size: 200px;
+}
+
 .tag-light {
   border-radius: 10px;
   padding: 0.5rem 1rem;
@@ -126,7 +168,9 @@ h3 {
   border: $border2pxSolidColor;
   background-color: var(--background);
   color: var(--foreground);
-  transition: .3s all;
+  transition: 0.3s all;
+  display: inline-block;
+  margin: 0.5rem 1rem 0.5rem 0;
 }
 
 .tag-light:hover {
@@ -341,46 +385,6 @@ h3 {
 // }
 
 //buttons gradient tracking
-.mouse-cursor-gradient-tracking {
-  position: relative;
-  background: var(--foreground);
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 10px;
-  color: var(--background);
-  cursor: pointer;
-  outline: none;
-  overflow: hidden;
-  color: var(--foreground);
-  background-color: var(--background);
-  border: $border2pxSolidColor;
-}
-
-.mouse-cursor-gradient-tracking span {
-  position: relative;
-}
-
-.mouse-cursor-gradient-tracking:before {
-  --size: 0;
-  content: "";
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: var(--size);
-  height: var(--size);
-  background: radial-gradient(
-    circle closest-side,
-    var(--clr-accent),
-    transparent
-  );
-  transform: translate(-50%, -50%);
-  transition: width 0.2s ease, height 0.2s ease;
-}
-
-.mouse-cursor-gradient-tracking:hover:before {
-  --size: 200px;
-}
 
 //dark mode toggle
 
@@ -398,7 +402,7 @@ blockquote {
   font-family: Georgia, serif;
   font-size: 18px;
   font-style: italic;
- 
+
   margin: 0.25em 0;
   padding: 0.35em 40px;
   line-height: 1.45;
@@ -587,7 +591,14 @@ header {
   }
   .logo {
     p {
-      display:inline-block;
+      display: inline-block;
+      transition: 0.3s all;
+      color: var(--background);
+      background-color: var(--foreground);
+      &:hover {
+        background-color: var(--background);
+        color: var(--foreground);
+      }
     }
   }
   .member {
@@ -604,7 +615,7 @@ header {
 .dashboard__header {
   position: relative;
   top: 140px;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 2rem;
 }
 
 .layout-grid {
@@ -669,7 +680,7 @@ header {
   h2 {
     font-size: 0.8rem;
     font-weight: 700;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
   }
   h3 {
     font-size: 0.7rem;
@@ -700,14 +711,14 @@ header {
   padding: 3em 2em 2em 2em;
   background: var(--background);
   border: $border2pxSolidColor;
-  
+
   box-shadow: rgba(206, 206, 206, 0.342) 0px 1px 1px 0px,
     rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
   text-align: center;
   display: inline-block;
   h2 {
     font-size: calc(1rem + 2vw);
-    margin: .25rem 0 50px 0;
+    margin: 0.25rem 0 50px 0;
     color: var(--foreground);
   }
   .form {
@@ -760,7 +771,7 @@ header {
       cursor: pointer;
       display: inline-block;
       width: auto;
-      height:auto;
+      height: auto;
       transition: 0.4s;
       margin-left: 2rem;
     }
@@ -897,6 +908,9 @@ header {
   }
 
   &__edit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     border-top: $border2pxSolidColor;
     border-bottom: $border2pxSolidColor;
   }
@@ -921,7 +935,7 @@ header {
       margin: 0.1rem 0.2rem 0.1rem 0;
       padding: 0.3rem 0.6rem;
       font-size: 0.8rem;
-      display:inline-block;
+      display: inline-block;
     }
   }
 
@@ -978,9 +992,8 @@ header {
   font-weight: 400;
 }
 
-
 footer {
-  position:relative;
+  position: relative;
   top: 140px;
   padding: 2rem 4rem;
   background: var(--background);
@@ -1002,16 +1015,16 @@ footer {
   .footer_about {
     /*   background:red; */
   }
-  
+
   .footer_about p {
     font-size: 0.85rem;
   }
-  
+
   .footer_main {
     /*   background:orange; */
     display: flex;
     flex-direction: column;
-   
+
     h3 {
       font-weight: bold;
       margin-bottom: 1rem;
@@ -1021,13 +1034,13 @@ footer {
   .footer_right {
     /*   background:blue; */
   }
-  
+
   .footer_right .footer_links {
     /*   background:gold; */
     padding: 1.2rem;
     display: flex;
     gap: 10px;
-    
+
     align-items: center;
     justify-content: flex-end;
   }
@@ -1073,7 +1086,6 @@ footer {
   }
 }
 
-
 @media screen and (max-width: 700px) {
   footer .footer {
     grid-template-columns: 1fr;
@@ -1088,8 +1100,7 @@ footer {
   }
 
   blockquote {
-    padding: .35em 0;
-    
+    padding: 0.35em 0;
   }
 
   .search-container {
@@ -1097,9 +1108,7 @@ footer {
 
     &__left {
       position: relative;
-    
     }
-  
   }
 
   header .member {

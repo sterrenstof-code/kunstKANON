@@ -11,7 +11,9 @@
 
     {% include '../snippets/header.html' %} 
     {% include '../snippets/breadcrums.html' %}
-    <h1>Add A Post</h1>
+
+    <div class="layout-grid">
+       <h1>Add A Post</h1>
     <form action="/" method="POST">
       <label for="title">title</label>
       <input type="text" name="title" id="title" placeholder="title" />
@@ -29,6 +31,8 @@
       <span>Submit</span>
     </button>
     </form>
+    </div>
+   
     
   </body>
   <script src="../../script.js"></script>

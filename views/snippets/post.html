@@ -50,9 +50,9 @@
     </form>
     {% endif %} {% if currentUser and post.author.equals(currentUser) %}
     <div class="post-container__edit">
-      <a href="/posts/{{post._id}}/edit">Edit Product</a>
+      <a class="tag-light" href="/posts/{{post._id}}/edit">Edit Product</a>
       <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
-        <button class="mouse-cursor-gradient-tracking">
+        <button class="tag-light mouse-cursor-gradient-tracking">
           <span>Delete</span>
         </button>
       </form>

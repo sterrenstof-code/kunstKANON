@@ -12,21 +12,23 @@
 <body>
     {% include '../snippets/header.html' %} 
     {% include '../snippets/breadcrums.html' %}
+    <div class="layout-grid">
+        <h1>Edit Post</h1>
+        <form action="/posts/{{post._id}}?_method=PUT" method="POST">
+            <label for="title">Post title</label>
+            <input type="text" name="title" id="title" placeholder="title" value="{{post.title}}">
+            <label for="caption">Post caption</label>
+            <input type="text" name="caption" id="caption" placeholder="caption" value="{{post.caption}}">
+            <label for="image">Select Image</label>
+            <input type="text" id="image" name="image" placeholder="image" value="{{post.image}}">    
+            <button class="tag-light mouse-cursor-gradient-tracking">
+                <span>Submit</span>
+              </button>
+        </form>
     
-    <h1>Edit Post</h1>
-    <form action="/posts/{{post._id}}?_method=PUT" method="POST">
-        <label for="title">Post title</label>
-        <input type="text" name="title" id="title" placeholder="title" value="{{post.title}}">
-        <label for="caption">Post caption</label>
-        <input type="text" name="caption" id="caption" placeholder="caption" value="{{post.caption}}">
-        <label for="image">Select Image</label>
-        <input type="text" id="image" name="image" placeholder="image" value="{{post.image}}">    
-        <button class="mouse-cursor-gradient-tracking">
-            <span>Submit</span>
-          </button>
-    </form>
-
-    <a href="/posts/{{post._id}}">Cancel</a>
+        <a href="/posts/{{post._id}}">Cancel</a>
+    </div>
+    
 
 </body>
 <script src="../../script.js"></script>

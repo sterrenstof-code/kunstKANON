@@ -88,34 +88,6 @@ h3 {
   color: var(--clr-accent);
 }
 
-.tag-light {
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  margin-right: 1rem;
-  border: 2px solid rgba(173, 173, 173, 0.295);
-  background-color: var(--background);
-  color: var(--foreground);
-  -webkit-transition: .3s all;
-  transition: .3s all;
-}
-
-.tag-light:hover {
-  color: var(--background);
-  background-color: var(--foreground);
-}
-
-.logout-pop-up {
-  z-index: 3;
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.5rem;
-  text-align: center;
-  background-color: var(--clr-accent);
-  -webkit-transition: all 2s;
-  transition: all 2s;
-}
-
 .mouse-cursor-gradient-tracking {
   position: relative;
   background: var(--foreground);
@@ -153,6 +125,36 @@ h3 {
 
 .mouse-cursor-gradient-tracking:hover:before {
   --size: 200px;
+}
+
+.tag-light {
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border: 2px solid rgba(173, 173, 173, 0.295);
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+  display: inline-block;
+  margin: 0.5rem 1rem 0.5rem 0;
+}
+
+.tag-light:hover {
+  color: var(--background);
+  background-color: var(--foreground);
+}
+
+.logout-pop-up {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: var(--clr-accent);
+  -webkit-transition: all 2s;
+  transition: all 2s;
 }
 
 .switch {
@@ -357,6 +359,15 @@ header > * {
 
 header .logo p {
   display: inline-block;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+  color: var(--background);
+  background-color: var(--foreground);
+}
+
+header .logo p:hover {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 header .member {
@@ -379,7 +390,7 @@ header .member a {
 .dashboard__header {
   position: relative;
   top: 140px;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 2rem;
 }
 
 .layout-grid {
@@ -458,7 +469,7 @@ header .member a {
 .card h2 {
   font-size: 0.8rem;
   font-weight: 700;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 
 .card h3 {
@@ -499,7 +510,7 @@ header .member a {
 
 .form__container h2 {
   font-size: calc(1rem + 2vw);
-  margin: .25rem 0 50px 0;
+  margin: 0.25rem 0 50px 0;
   color: var(--foreground);
 }
 
@@ -744,6 +755,16 @@ header .member a {
 }
 
 .post-container__edit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-top: 2px solid rgba(173, 173, 173, 0.295);
   border-bottom: 2px solid rgba(173, 173, 173, 0.295);
 }
@@ -960,7 +981,7 @@ footer .footer_right .footer_links i {
     text-align: center;
   }
   blockquote {
-    padding: .35em 0;
+    padding: 0.35em 0;
   }
   .search-container {
     top: 140px;
